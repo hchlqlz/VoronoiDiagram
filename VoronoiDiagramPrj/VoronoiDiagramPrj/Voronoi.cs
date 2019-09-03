@@ -391,7 +391,7 @@ namespace VoronoiDiagram
 				int a1, a2 = -1;
 				int b1, b2 = -1;
 				if (k == 0) {
-					if (a.Y < 0 || a.Y >= XSize) {
+					if (a.Y < 0 || a.Y >= XSize || b.X <= 0 || a.X >= XSize) {
 						return false;
 					}
 					a1 = 2;
