@@ -261,7 +261,15 @@ namespace VoronoiDiagram
 			if (A.Y == B.Y) {
 				// 当 A 和 B 在同一水平线上时，由于准线又相同，所以交点一定在A、B 垂直平分线上
 				// 不考虑 y == A.Y 导致两抛物线无交点的情况，因为 y 是会不断变化的，所以这里假定交点必然存在
-				res.X = (A.X + B.X) / 2;
+				if (A.X < B.X)
+				{
+					res.X = (A.X + B.X) / 2;
+				}
+				else
+				{
+					res.X = 0xffffffff;
+				}
+
 			} else if (A.Y == y) {
 				// 焦点坐标在准线上，这时候的抛物线是一条竖线，所以交点 x 坐标等于焦点 x 坐标
 				res.X = A.X;

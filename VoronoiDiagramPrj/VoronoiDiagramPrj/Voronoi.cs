@@ -72,41 +72,42 @@ namespace VoronoiDiagram
 					oldArc.CircleEvent = null;
 				}
 
-				if (oldArc.A.Y == e.QueryPoint().Y) {
-					// 可以选择不要这个分支，直接统一走下面那个
-					// 这样的话，计算交点的方法需要做特殊处理
+				//if (oldArc.A.Y == e.QueryPoint().Y) {
+				//	// 可以选择不要这个分支，直接统一走下面那个
+				//	// 这样的话，计算交点的方法需要做特殊处理
 
-					// 如果正上方弧的 y 坐标和新站点的 y 坐标一致
-					// 则是一条弧分裂成两条弧，将原先的弧删掉，新增一个内部结点和两个叶子结点
-					var intersection = new IntersectionData(oldArc.A, e.QueryPoint(), oldArc.Fa, oldArc.IsLeft(), tree);
-					var arc01 = new ArcData(oldArc.A, intersection, true);
-					var arc02 = new ArcData(e.QueryPoint(), intersection, false);
+				//	// 如果正上方弧的 y 坐标和新站点的 y 坐标一致
+				//	// 则是一条弧分裂成两条弧，将原先的弧删掉，新增一个内部结点和两个叶子结点
+				//	var intersection = new IntersectionData(oldArc.A, e.QueryPoint(), oldArc.Fa, oldArc.IsLeft(), tree);
+				//	var arc01 = new ArcData(oldArc.A, intersection, true);
+				//	var arc02 = new ArcData(e.QueryPoint(), intersection, false);
 
-					// 维护双向链表
-					arc01.Prev = oldArc.Prev;
-					arc02.Prev = arc01;
-					if (oldArc.Next != null) {
-						oldArc.Next.Prev = arc02;
-					}
+				//	// 维护双向链表
+				//	arc01.Prev = oldArc.Prev;
+				//	arc02.Prev = arc01;
+				//	if (oldArc.Next != null) {
+				//		oldArc.Next.Prev = arc02;
+				//	}
 
-					if (oldArc.Prev != null) {
-						oldArc.Prev.Next = arc01;
-					}
-					arc01.Next = arc02;
-					arc02.Next = oldArc.Next;
+				//	if (oldArc.Prev != null) {
+				//		oldArc.Prev.Next = arc01;
+				//	}
+				//	arc01.Next = arc02;
+				//	arc02.Next = oldArc.Next;
 
-					arc01.S0 = oldArc.S0;
-					
-					// 交点目前坐标，用于创建维诺图边
-					var p = intersection.CalcIntersection(e.QueryPoint().Y);
+				//	arc01.S0 = oldArc.S0;
 
-					// 交点计算
-					var seg = new Segment(p, QueryFace(e.QueryPoint()), QueryFace(oldArc.A));
-					arc01.S1 = seg;
-					arc02.S0 = seg;
+				//	// 交点目前坐标，用于创建维诺图边
+				//	var p = intersection.CalcIntersection(e.QueryPoint().Y);
 
-					FixCircleEvent(arc01);
-				} else {
+				//	// 交点计算
+				//	var seg = new Segment(p, QueryFace(e.QueryPoint()), QueryFace(oldArc.A));
+				//	arc01.S1 = seg;
+				//	arc02.S0 = seg;
+
+				//	FixCircleEvent(arc01);
+				//} else {
+				
 					// 正常情况下，正上方的弧会被新增弧分割成两段
 					// 将原先的弧删掉，新增两个内部结点和三个叶子结点
 					var intersection01 = new IntersectionData(oldArc.A, e.QueryPoint(), oldArc.Fa, oldArc.IsLeft(), tree);
@@ -148,7 +149,7 @@ namespace VoronoiDiagram
 					
 					FixCircleEvent(arc01);
 					FixCircleEvent(arc03);
-				}
+			//	}
 			}
 		}
 
@@ -394,7 +395,7 @@ namespace VoronoiDiagram
 						return false;
 					}
 					a1 = 2;
-					b1 = 2;
+					b1 = 3;
 				} else if (k < 0) {
 					if (a.Y < 0 || a.X >= XSize || b.Y >= YSize || b.X < 0) {
 						return false;
